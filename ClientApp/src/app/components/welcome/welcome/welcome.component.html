@@ -1,0 +1,15 @@
+<div class="container" *ngIf="userDetail">
+  <div class="jumbotron text-center">
+    <h1>Welcome {{userDetail.name}}</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <p>There are {{userDetail.numberOfVowelsInName}} vowels in your first name</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <p>You are {{userDetail.age}} years old</p>
+    </div>
+  </div>
+</div>
