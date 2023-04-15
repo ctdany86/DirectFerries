@@ -23,7 +23,7 @@ import { WelcomeComponent } from './components/welcome/welcome/welcome.component
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'welcome', component: WelcomeComponent, pathMatch: 'full' }
+      { path: 'welcome', component: WelcomeComponent, pathMatch: 'full'}
     ])
   ],
   providers: [],
