@@ -6,16 +6,19 @@ import { UserDetail } from '../../../models/user-detail';
 import { HttpClientModule } from '@angular/common/http';
 
 const mockUserService = {
-  GetUserWelcomeDetails(): Observable<UserDetail> {
-    return of();
+  GetUserWelcomeDetails(formData: any): Observable<UserDetail> {
+    return of({} as UserDetail);
   }
-} as unknown as UserService;
+} as UserService;
 
-describe('WelcomeComponent', () => {
+fdescribe('WelcomeComponent', () => {
   let component: WelcomeComponent;
   let fixture: ComponentFixture<WelcomeComponent>;
+  //let mockUserService: jasmine.SpyObj<UserService>;
 
   beforeEach(async () => {
+    //mockUserService = jasmine.createSpyObj<UserService>('UserService', ['GetUserWelcomeDetails'])
+
     await TestBed.configureTestingModule({
       declarations: [ WelcomeComponent ],
       providers:[
@@ -28,6 +31,10 @@ describe('WelcomeComponent', () => {
     fixture = TestBed.createComponent(WelcomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 });
 

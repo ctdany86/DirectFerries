@@ -231,4 +231,4 @@ _Pvt_Extensions
 .fake/
 
 # Angular
-ClientApp/.angular
+source/ClientApp/.angular
