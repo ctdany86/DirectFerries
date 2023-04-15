@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class WelcomeComponent implements OnInit {
   formData = history.state?.value;
+  error = { message: '' };
   upcomingBirthdayDates: Date[];
   userDetail: UserDetail;
 
@@ -20,6 +21,9 @@ export class WelcomeComponent implements OnInit {
         console.log('Form data received successfully', response);
       },
       (error: any) => {
+        this.error = {
+          message: error.error.message
+        };
         console.log('Error receiving form data:', error);
       }
     );

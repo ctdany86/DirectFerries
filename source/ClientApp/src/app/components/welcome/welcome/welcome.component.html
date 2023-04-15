@@ -1,4 +1,4 @@
-<div class="container" *ngIf="userDetail">
+<div class="container" *ngIf="userDetail; else errorSection">
   <div class="jumbotron text-center">
     <h1>Welcome {{userDetail.name}}</h1>
   </div>
@@ -13,3 +13,8 @@
     </div>
   </div>
 </div>
+<ng-template #errorSection>
+  <div class="alert alert-danger" *ngIf="error.message">
+    <p>{{ error.message }}</p>
+  </div>
+</ng-template>

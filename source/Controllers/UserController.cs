@@ -22,6 +22,24 @@ namespace DirectFerriesWebApp.Controllers
         [Route("get-user-welcome-page")]
         public IActionResult GetUserWelcomePage([FromQuery] string fullName, DateTime dateOfBirth)
         {
+            if (dateOfBirth >= _dateTimeProvider.DateTimeNow)
+            {
+                return BadRequest(new
+                {
+                    Message = "Invalid date of birth",
+                    ErrorCode = "INVALID_FULL_NAME"
+                });
+            }
+
+            if (string.IsNullOrEmpty(fullName))
+            {
+                return BadRequest(new
+                {
+                    Message = "Invalid full name",
+                    ErrorCode = "INVALID_FULL_NAME"
+                });
+            }
+
             var name = UserHelper.GetNameFromFullName(fullName);
             var numberOfVowelsInName = UserHelper.GetNumberOfVowelsInTheName(name);
             var age = UserHelper.GetAgeFromDateOfBirth(dateOfBirth, _dateTimeProvider.DateTimeNow);
@@ -37,12 +55,7 @@ namespace DirectFerriesWebApp.Controllers
 
                 return Ok(result);
             }
-
-            catch (ValidationException e)
-            {
-                return BadRequest(e.Message);
-            }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError);
             }

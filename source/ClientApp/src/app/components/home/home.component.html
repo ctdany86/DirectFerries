@@ -1,11 +1,13 @@
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="form-group">
   <div>
     <label for="textInput">Full Name:</label>
-    <input type="text" formControlName="fullName">
+    <input type="text" class="form-control form-outline w-25" formControlName="fullName" placeholder="Enter full name">
   </div>
+  <br />
   <div>
     <label for="dateInput">Date Of Birth:</label>
-    <input type="date" formControlName="dateOfBirth">
+    <input type="date" class="form-control form-outline w-25" formControlName="dateOfBirth" placeholder="Select a date">
   </div>
-  <button type="submit">Submit</button>
+  <br />
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
