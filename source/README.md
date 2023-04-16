@@ -1,27 +1,28 @@
-# README #
+# README - TEST#
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Please can you complete this small technical exercise. Once complete, please upload the solution to a public github repo and send us the link prior to the call on Monday.
 
-### What is this repository for? ###
+It’s up to you whether it’s web forms or MVC, or if you use .net Core etc. We want to see how you interpret the requirements, and to see your understanding & use of good coding practises.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+Create visual studio web project (c# or vb.net)
+
+ask user to enter full name, dob
+
+redirect the user to another page on submission
+
+display welcome message with users first name only
+
+display message showing how many vowels are in the name
+
+display message showing how old the user is and how many days before next birthday
+
+show table which displays 14 days before run up to next birthday (days of week (mon, tue, wed etc..) and allow the dates to be clickable, which redirect the user to the following “https://www.historynet.com/today-in-history/june-10” with selected date
+
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
+* Open the solution in Visual Studio - running the project should automatically download all the needed node modules
+* To run the fronend test, open the ClientApp folder with VS Code and in the terminal run: npm test 
 
 ### Who do I talk to? ###
 
