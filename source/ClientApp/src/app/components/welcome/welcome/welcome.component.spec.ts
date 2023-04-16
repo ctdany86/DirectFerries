@@ -1,28 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { WelcomeComponent } from './welcome.component';
 import { UserService } from 'src/app/services/user.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { UserDetail } from '../../../models/user-detail';
 import { HttpClientModule } from '@angular/common/http';
+import { UserWelcomeDetail } from 'src/app/models/user-welcome-detail';
 
 const mockUserService = {
-  GetUserWelcomeDetails(formData: any): Observable<UserDetail> {
-    return of({} as UserDetail);
+  GetUserWelcomeDetails(userDetail: UserDetail): Observable<UserWelcomeDetail> {
+    return of({ name: "Daniele Morina", numberOfVowelsInName: 4, age: 36 } as UserWelcomeDetail);
   }
 } as UserService;
 
-fdescribe('WelcomeComponent', () => {
+describe('WelcomeComponent', () => {
   let component: WelcomeComponent;
   let fixture: ComponentFixture<WelcomeComponent>;
-  //let mockUserService: jasmine.SpyObj<UserService>;
 
   beforeEach(async () => {
-    //mockUserService = jasmine.createSpyObj<UserService>('UserService', ['GetUserWelcomeDetails'])
-
     await TestBed.configureTestingModule({
       declarations: [ WelcomeComponent ],
       providers:[
-        { provider: UserService, useValue: mockUserService}
+        { provide: UserService, useValue: mockUserService}
       ],
       imports: [HttpClientModule],
     })
@@ -30,11 +28,25 @@ fdescribe('WelcomeComponent', () => {
 
     fixture = TestBed.createComponent(WelcomeComponent);
     component = fixture.componentInstance;
+    component.userDetail = { fullName: "Daniele Morina", dateOfBirth: new Date() };
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should get user welcome details on init', () => {
+    // Arrange
+    const userDetail: UserDetail = { fullName: "Daniele Morina", dateOfBirth: new Date(1986, 9, 28) };
+    const userWelcomeDetail: UserWelcomeDetail = { name: "Daniele Morina", numberOfVowelsInName: 4, age: 36 };
+    component.userDetail = userDetail;
+
+    // Act
+    fixture.detectChanges();
+
+    // Assert
+    expect(component.userWelcomeDetail).toEqual(userWelcomeDetail);
   });
 });
 

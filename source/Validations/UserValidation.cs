@@ -1,15 +1,55 @@
-﻿namespace DirectFerriesWebApp.Validations
+﻿using DirectFerriesWebApp.Services;
+using System.ComponentModel.DataAnnotations;
+
+namespace DirectFerriesWebApp.Validations
 {
     public class UserValidation : IUserValidation
     {
-        public bool IsFullNameValid(string fullName)
+        private readonly IDateTimeProvider _dateTimeProvider;
+
+        public UserValidation(IDateTimeProvider dateTimeProvider)
         {
-            throw new NotImplementedException();
+            _dateTimeProvider = dateTimeProvider;
         }
 
-        public bool IsDateOfBirthValid(string dateOfBirth)
+        public ValidationResult ValidateUser(string fullName, DateTime dateOfBirth)
         {
-            throw new NotImplementedException();
+            var result = new ValidationResult();
+
+            if (IsDateOfBirthInvalid(dateOfBirth) && IsFullNameInvalid(fullName))
+            {
+                result.IsValid = false;
+                result.Message = "Invalid full name and date of birth";
+                result.ErrorCode = "INVALID_FULL_NAME_AND_DOB";
+            }
+            else if (IsDateOfBirthInvalid(dateOfBirth))
+            {
+                result.IsValid = false;
+                result.Message = "Invalid date of birth";
+                result.ErrorCode = "INVALID_DOB";
+            }
+            else if (IsFullNameInvalid(fullName))
+            {
+                result.IsValid = false;
+                result.Message = "Invalid full name";
+                result.ErrorCode = "INVALID_FULL_NAME";
+            }
+            else
+            {
+                result.IsValid = true;
+            }
+
+            return result;
+        }
+
+        private bool IsFullNameInvalid(string fullName)
+        {
+            return string.IsNullOrEmpty(fullName);
+        }
+
+        private bool IsDateOfBirthInvalid(DateTime dateOfBirth)
+        {
+            return dateOfBirth >= _dateTimeProvider.DateTimeNow || dateOfBirth == DateTime.MinValue;
         }
     }
 }

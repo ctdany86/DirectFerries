@@ -1,4 +1,5 @@
 using DirectFerriesWebApp.Services;
+using DirectFerriesWebApp.Validations;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+// Dependency Injection
 builder.Services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+builder.Services.AddSingleton<IUserValidation, UserValidation>();
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {

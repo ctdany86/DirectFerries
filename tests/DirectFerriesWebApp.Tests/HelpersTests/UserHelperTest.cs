@@ -8,51 +8,52 @@ namespace DirectFerriesWebApp.Tests.HelpersTests
 {
     public class UserHelperTest
     {
-        private readonly IDateTimeProvider _dateTimeProvider = Substitute.For<IDateTimeProvider>();
+        private IDateTimeProvider _dateTimeProvider;
 
         [SetUp]
         public void Setup()
         {
+            _dateTimeProvider = Substitute.For<IDateTimeProvider>();
         }
 
         [Test]
         public void GivenAValidFullName_WhenGetNameFromFullNameIsCalled_ThenShouldReturnTheNameOnly()
         {
-            // arrange
+            // Arrange
             var fullName = "Daniele Morina";
 
-            // act
+            // Act
             var result = UserHelper.GetNameFromFullName(fullName);
 
-            // assert
+            // Assert
             result.ShouldBe("Daniele");
         }
 
         [Test]
         public void GivenAValidName_WhenGetNumberOfVowelsInTheNameIsCalled_ThenShouldReturnTheNumberOfVowelFromTheName()
         {
-            // arrange
+            // Arrange
             var name = "Daniele";
 
-            // act
+            // Act
             var result = UserHelper.GetNumberOfVowelsInTheName(name);
 
-            // assert
+            // Assert
             result.ShouldBe(4);
         }
 
         [Test]
         public void GivenAValidDateOfBirth_WhenGetAgeFromDateOfBirthIsCalled_ThenShouldReturnTheCorrectAge()
         {
-            // arrange
+            // Arrange
             _dateTimeProvider.DateTimeNow.Returns(new DateTime(2023, 04,15));
             var dateTimeNow = _dateTimeProvider.DateTimeNow;
             var dayOfBirth = new DateTime(1986, 09, 28);
 
-            // act
+            // Act
             var result = UserHelper.GetAgeFromDateOfBirth(dayOfBirth, dateTimeNow);
 
-            // assert
+            // Assert
             result.ShouldBe(36);
         }
     }

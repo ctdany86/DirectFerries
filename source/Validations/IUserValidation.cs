@@ -2,8 +2,6 @@
 {
     public interface IUserValidation
     {
-        public bool IsFullNameValid(string fullName);
-
-        public bool IsDateOfBirthValid(string dateOfBirth);
+        public ValidationResult ValidateUser(string fullName, DateTime dateOfBirth);
     }
 }

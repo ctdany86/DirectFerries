@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserDetail } from '../models/user-detail';
 import { map, catchError, throwError, Observable } from 'rxjs';
+import { UserWelcomeDetail } from '../models/user-welcome-detail';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,13 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  GetUserWelcomeDetails(formData: any): Observable<UserDetail> {
-    return this.http.get<UserDetail>(`${this.userUrl}/get-user-welcome-page?fullName=${formData.fullName}&dateOfBirth=${formData.dateOfBirth}`).pipe(
-      map((response: UserDetail) => response),
+  GetUserWelcomeDetails(userDetail: UserDetail): Observable<UserWelcomeDetail> {
+    console.log('User reponse', userDetail);
+    return this.http.get<UserWelcomeDetail>(`${this.userUrl}/get-user-welcome-page?fullName=${userDetail.fullName}&dateOfBirth=${userDetail.dateOfBirth}`).pipe(
+      map((response: UserWelcomeDetail) => {
+        console.log('User reponse', response);
+        return response
+      }),
       catchError((error: any) => throwError(error))
     );
   }

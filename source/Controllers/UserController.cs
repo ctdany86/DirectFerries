@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 using System.Net;
 using DirectFerriesWebApp.Helpers;
 using DirectFerriesWebApp.Models;
 using DirectFerriesWebApp.Services;
+using DirectFerriesWebApp.Validations;
 
 namespace DirectFerriesWebApp.Controllers
 {
@@ -12,32 +12,23 @@ namespace DirectFerriesWebApp.Controllers
     public class UserController : Controller
     {
         private readonly IDateTimeProvider _dateTimeProvider;
+        private readonly IUserValidation _userValidation;
 
-        public UserController(IDateTimeProvider dateTimeProvider)
+        public UserController(IDateTimeProvider dateTimeProvider, IUserValidation userValidation)
         {
             _dateTimeProvider = dateTimeProvider;
+            _userValidation = userValidation;
         }
 
         [HttpGet]
         [Route("get-user-welcome-page")]
         public IActionResult GetUserWelcomePage([FromQuery] string fullName, DateTime dateOfBirth)
         {
-            if (dateOfBirth >= _dateTimeProvider.DateTimeNow)
-            {
-                return BadRequest(new
-                {
-                    Message = "Invalid date of birth",
-                    ErrorCode = "INVALID_FULL_NAME"
-                });
-            }
+            var validationResult = _userValidation.ValidateUser(fullName, dateOfBirth);
 
-            if (string.IsNullOrEmpty(fullName))
+            if (!validationResult.IsValid)
             {
-                return BadRequest(new
-                {
-                    Message = "Invalid full name",
-                    ErrorCode = "INVALID_FULL_NAME"
-                });
+                return BadRequest(validationResult);
             }
 
             var name = UserHelper.GetNameFromFullName(fullName);

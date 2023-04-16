@@ -1,15 +1,15 @@
-<div class="container" *ngIf="userDetail; else errorSection">
+<div class="container" *ngIf="userWelcomeDetail; else errorSection">
   <div class="jumbotron text-center">
-    <h1>Welcome {{userDetail.name}}</h1>
+    <h1>Welcome {{userWelcomeDetail.name}}</h1>
   </div>
   <div class="row">
     <div class="col-md-6">
-      <p>There are {{userDetail.numberOfVowelsInName}} vowels in your first name</p>
+      <p>There are {{userWelcomeDetail.numberOfVowelsInName}} vowels in your first name</p>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
-      <p>You are {{userDetail.age}} years old</p>
+      <p>You are {{userWelcomeDetail.age}} years old</p>
     </div>
   </div>
 </div>
