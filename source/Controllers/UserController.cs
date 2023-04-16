@@ -34,6 +34,7 @@ namespace DirectFerriesWebApp.Controllers
             var name = UserHelper.GetNameFromFullName(fullName);
             var numberOfVowelsInName = UserHelper.GetNumberOfVowelsInTheName(name);
             var age = UserHelper.GetAgeFromDateOfBirth(dateOfBirth, _dateTimeProvider.DateTimeNow);
+            var daysUntilNextBirthday = UserHelper.GetDaysUntilNextBirthday(dateOfBirth, _dateTimeProvider.DateTimeNow); 
             var datesBeforeNextBirthday = UserHelper.GetDatesBeforeNextBirthday(dateOfBirth, _dateTimeProvider.DateTimeNow);
 
             try
@@ -43,6 +44,7 @@ namespace DirectFerriesWebApp.Controllers
                     Name = name,
                     NumberOfVowelsInName = numberOfVowelsInName,
                     Age = age,
+                    DaysUntilNextBirthday = daysUntilNextBirthday,
                     DatesBeforeNextBirthday = datesBeforeNextBirthday
                 };
 

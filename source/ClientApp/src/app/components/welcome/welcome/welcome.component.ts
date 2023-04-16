@@ -5,11 +5,10 @@ import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-welcome',
-  templateUrl: './welcome.component.html',
+  templateUrl: './welcome.component.html'
 })
 export class WelcomeComponent implements OnInit {
   error = { message: '' };
-  upcomingBirthdayDates: Date[];
   userWelcomeDetail: UserWelcomeDetail;
   userDetail: UserDetail = history.state?.value;
 

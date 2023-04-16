@@ -9,9 +9,8 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <p>You are {{userWelcomeDetail.age}} years old</p>
+      <p>You are {{userWelcomeDetail.age}} years old and your next birthday is in {{ userWelcomeDetail.daysUntilNextBirthday }} days</p>    </div>
     </div>
-  </div>
   <table class="table table-bordered">
     <tbody>
       <tr *ngFor="let dates of userWelcomeDetail.datesBeforeNextBirthday | chunk: 7">
