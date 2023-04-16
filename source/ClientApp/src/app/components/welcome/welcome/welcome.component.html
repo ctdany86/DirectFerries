@@ -12,6 +12,15 @@
       <p>You are {{userWelcomeDetail.age}} years old</p>
     </div>
   </div>
+  <table class="table table-bordered">
+    <tbody>
+      <tr *ngFor="let dates of userWelcomeDetail.datesBeforeNextBirthday | chunk: 7">
+        <td *ngFor="let date of dates" class="text-center">
+          <a [href]="'https://www.historynet.com/today-in-history/' + (date | date:'MMMM-dd')" target="_blank">{{ date | date:'EEE dd' }}</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <ng-template #errorSection>
   <div class="alert alert-danger" *ngIf="error.message">

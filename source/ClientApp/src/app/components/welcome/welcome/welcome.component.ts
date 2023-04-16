@@ -19,12 +19,9 @@ export class WelcomeComponent implements OnInit {
     this._userService.GetUserWelcomeDetails(this.userDetail).subscribe(
       (response: UserWelcomeDetail) => {
         this.userWelcomeDetail = response;
-        console.log('Form data received successfully', response);
       },
       (error: any) => {
-        this.error = {
-          message: error.error.message
-        };
+        this.error = { message: error.error.message };
         console.log('Error receiving form data:', error);
       }
     );

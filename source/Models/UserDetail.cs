@@ -5,5 +5,6 @@
         public string Name { get; set; }
         public int NumberOfVowelsInName { get; set; }
         public int Age { get; set; }
+        public List<DateTime> DatesBeforeNextBirthday { get; set; }
     }
 }

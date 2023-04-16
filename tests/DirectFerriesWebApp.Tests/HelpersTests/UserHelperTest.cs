@@ -56,5 +56,37 @@ namespace DirectFerriesWebApp.Tests.HelpersTests
             // Assert
             result.ShouldBe(36);
         }
+
+        [Test]
+        public void GivenAValidDateOfBirth_WhenGetDatesBeforeNextBirthdayIsCalled_ThenShouldReturnTheCorrectDates()
+        {
+            // Arrange
+            _dateTimeProvider.DateTimeNow.Returns(new DateTime(2023, 04, 15));
+            var dateTimeNow = _dateTimeProvider.DateTimeNow;
+            var dayOfBirth = new DateTime(1986, 09, 28);
+            var expectedDates = new List<DateTime>
+            {
+                new(2023, 09, 28),
+                new(2023, 09, 27),
+                new(2023, 09, 26),
+                new(2023, 09, 25),
+                new(2023, 09, 24),
+                new(2023, 09, 23),
+                new(2023, 09, 22),
+                new(2023, 09, 21),
+                new(2023, 09, 20),
+                new(2023, 09, 19),
+                new(2023, 09, 18),
+                new(2023, 09, 17),
+                new(2023, 09, 16),
+                new(2023, 09, 15)
+            };
+
+            // Act
+            var result = UserHelper.GetDatesBeforeNextBirthday(dayOfBirth, dateTimeNow);
+
+            // Assert
+            result.ShouldBe(expectedDates);
+        }
     }
 }

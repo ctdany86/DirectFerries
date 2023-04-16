@@ -44,7 +44,7 @@ namespace DirectFerriesWebApp.Validations
 
         private bool IsFullNameInvalid(string fullName)
         {
-            return string.IsNullOrEmpty(fullName);
+            return string.IsNullOrEmpty(fullName) || fullName.Any(c => char.IsDigit(c));
         }
 
         private bool IsDateOfBirthInvalid(DateTime dateOfBirth)
